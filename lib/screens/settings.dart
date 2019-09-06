@@ -148,10 +148,20 @@ class _SettingsPageState extends State<SettingsPage> {
                           fontSize: 24,
                           color: Theme.of(context).primaryColor)),
                   Container(
-                    height: 40,
+                    height: 20,
                   ),
                   Center(
-                    child: Text('Developed by'.toUpperCase(),
+                    child: Text('Version: 1.0.0',
+                        style: TextStyle(
+                            fontFamily: 'ZillaSlab',
+                            fontSize: 16,
+                            color: Theme.of(context).primaryColor)),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Center(
+                    child: Text('Provided by'.toUpperCase(),
                         style: TextStyle(
                             color: Colors.grey.shade600,
                             fontWeight: FontWeight.w500,
@@ -166,7 +176,21 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                   )),
                   Container(
-                    height: 30,
+                    height: 15,
+                  ),
+                  Center(
+                    child: GestureDetector(
+                        onTap: _launchURL,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
+                          child: Text(
+                            'Privacy Policy',
+                            style: TextStyle(
+                                fontFamily: 'ZillaSlab',
+                                fontSize: 16,
+                                color: colorList.elementAt(0)),
+                          ),
+                        )),
                   ),
                 ],
               ))
@@ -175,6 +199,16 @@ class _SettingsPageState extends State<SettingsPage> {
         ],
       ),
     );
+  }
+
+  _launchURL() async {
+    var privacyPolicyUrl =
+        'https://snowclare.github.io/country_flags/matrix_notes_privacy_policy/';
+    if (await canLaunch(privacyPolicyUrl)) {
+      await launch(privacyPolicyUrl);
+    } else {
+      throw 'Could not launch url';
+    }
   }
 
   Widget buildCardWidget(Widget child) {
